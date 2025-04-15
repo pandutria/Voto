@@ -180,7 +180,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/yelow"
         android:text="Checkout"
