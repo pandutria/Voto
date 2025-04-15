@@ -1,5 +1,6 @@
 package com.example.voto.view.ui
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +20,9 @@ class DetailCameraScreen : AppCompatActivity() {
     lateinit var binding: ActivityDetailCameraScreenBinding
     var camera_id = 0
 
+    var price = 0
+    var photo = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailCameraScreenBinding.inflate(layoutInflater)
@@ -33,8 +37,17 @@ class DetailCameraScreen : AppCompatActivity() {
 
         binding.btn.setOnClickListener {
             cart.cartList.add(Cart(
-                Camera()
+                Camera(
+                    id = camera_id,
+                    name = binding.tvName.text.toString(),
+                    price = price,
+                    photo = photo
+                ),
+                qty = 1,
+                subtotal = price
             ))
+
+            startActivity(Intent(this, CartScreen::class.java))
         }
     }
 
@@ -62,6 +75,8 @@ class DetailCameraScreen : AppCompatActivity() {
                         binding.tvSpeed.text = c.getString("shuterSpeedRange")
                         binding.tvDimensions.text = c.getString("dimensions")
                         binding.tvPrice.text = helper.formatRupiah(c.getInt("price"))
+                        activity.price = c.getInt("price")
+                        activity.photo = c.getString("photo")
                         helper.showImage(binding.imgImage).execute(helper.urlImage + c.getString("photo"))
 
                         if (c.getBoolean("wiFi")) {

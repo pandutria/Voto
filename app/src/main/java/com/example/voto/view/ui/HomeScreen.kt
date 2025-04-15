@@ -1,5 +1,6 @@
 package com.example.voto.view.ui
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
@@ -25,6 +26,10 @@ class HomeScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this, CartScreen::class.java))
+        }
 
         binding.etSearch.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

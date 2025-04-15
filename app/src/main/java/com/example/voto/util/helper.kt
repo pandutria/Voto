@@ -14,6 +14,7 @@ import java.util.Locale
 object helper {
     var url = "http://10.0.2.2:5000/api/"
     var urlImage = url.replace("api/", "images/")
+    var fee = 30000
 
     fun formatRupiah(num: Int): String {
         var format = NumberFormat.getNumberInstance(Locale("in", "ID"))

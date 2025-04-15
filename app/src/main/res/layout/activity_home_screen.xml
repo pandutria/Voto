@@ -21,8 +21,15 @@
 
         <ImageView
             android:layout_width="35dp"
+            android:layout_height="28dp"
+            android:src="@drawable/logosmall" />
+
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/logosmall"/>
+            android:layout_gravity="end"
+            android:src="@drawable/baseline_call_to_action_24" />
 
     </LinearLayout>
 
