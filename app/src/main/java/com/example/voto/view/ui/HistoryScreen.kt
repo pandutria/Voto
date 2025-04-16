@@ -33,6 +33,70 @@ class HistoryScreen : AppCompatActivity() {
         showData(this).execute()
     }
 
+//    class showData(private var activity: HistoryScreen) : AsyncTask<String, Void, String>() {
+//        var historyList: MutableList<History> = arrayListOf()
+//        override fun doInBackground(vararg p0: String?): String {
+//            return HttpHandler().request(
+//                endpoint = "me/transaction",
+//                method = "GET",
+//                token = mySharedPrefrence.getToken(activity)
+//            )
+//        }
+//
+//        override fun onPostExecute(result: String?) {
+//            super.onPostExecute(result)
+//            if (result!!.isNotEmpty()) {
+//                var body = JSONObject(result).getString("body")
+//                var code = JSONObject(result).getInt("code")
+//
+//                if (code == 200) {
+//                    var jsonArray = JSONArray(body)
+//
+//                    for (i in 0 until jsonArray.length()) {
+//                        var history = jsonArray.getJSONObject(i)
+//
+//                        var id = history.getString("id")
+//                        var status = history.getString("status")
+//                        var totalPrice = history.getInt("totalPrice")
+//
+//                        var transaction = history.getJSONArray("transactions")
+//                        var cartList: MutableList<Cart> = arrayListOf()
+//
+//                        for (ii in 0 until transaction.length()) {
+//                            var cart = transaction.getJSONObject(ii)
+//                            var name = cart.getString("name")
+//                            var qty = cart.getInt("qty")
+//                            var subtotal = cart.getInt("subtotal")
+//
+//                            cartList.add(
+//                                Cart(
+//                                    qty = qty,
+//                                    subtotal = subtotal,
+//                                    camera = Camera(name = name)
+//                                )
+//                            )
+//                        }
+//
+//                        historyList.add(
+//                            History(
+//                                id = id,
+//                                status = status,
+//                                totalPrice = totalPrice,
+//                                cart = cartList
+//                            )
+//                        )
+//                    }
+//                    activity.binding.rv.adapter = HistoryAdapter(historyList)
+//                activity.binding.rv.layoutManager = LinearLayoutManager(activity)
+//
+//                } else {
+//                    helper.log(body)
+//                }
+//            }
+//
+//        }
+//    }
+
     class showData(private var activity: HistoryScreen): AsyncTask<Void, Void, Void>() {
         var historyList: MutableList<History> = arrayListOf()
 
@@ -46,6 +110,10 @@ class HistoryScreen : AppCompatActivity() {
 
                 var body = JSONObject(jsonUrl).getString("body")
                 var code = JSONObject(jsonUrl).getInt("code")
+
+                helper.log("Full response: $jsonUrl")
+                helper.log("Code: $code")
+                helper.log("Body: $body")
 
                 if (code == 200) {
                     var jsonArray = JSONArray(body)
@@ -87,14 +155,15 @@ class HistoryScreen : AppCompatActivity() {
 
 
             } catch (e: Exception) {
-                helper.log(e.message.toString())
+                e.printStackTrace()
+                helper.log("Error: ${e.localizedMessage ?: "Unknown error"}")
             }
             return null
         }
 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
-            if (result.toString().isNotEmpty()) {
+            if (historyList.isNotEmpty()) {
                 activity.binding.rv.adapter = HistoryAdapter(historyList)
                 activity.binding.rv.layoutManager = LinearLayoutManager(activity)
             }

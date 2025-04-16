@@ -20,7 +20,7 @@ class NestedAdapter(private var cartList: List<Cart>): RecyclerView.Adapter<Nest
         var cart = cartList[position]
         var binding = holder.binding
         binding.tvName.text = cart.camera.name
-        binding.tvQty.text = cart.qty.toString()
+        binding.tvQty.text = "(${cart.qty})"
         binding.tvSubtotal.text = helper.formatRupiah(cart.subtotal!!)
     }
 

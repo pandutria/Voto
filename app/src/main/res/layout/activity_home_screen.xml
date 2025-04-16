@@ -21,8 +21,13 @@
 
         <ImageView
             android:layout_width="35dp"
-            android:layout_height="28dp"
+            android:layout_height="35dp"
             android:src="@drawable/logosmall" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
 
         <ImageView
             android:id="@+id/cart"
@@ -30,6 +35,14 @@
             android:layout_height="35dp"
             android:layout_gravity="end"
             android:src="@drawable/baseline_call_to_action_24" />
+
+        <ImageView
+            android:id="@+id/walet"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="end"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/baseline_account_balance_wallet_24" />
 
     </LinearLayout>
 

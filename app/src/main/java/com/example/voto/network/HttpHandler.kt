@@ -23,11 +23,11 @@ class HttpHandler {
             conn.setRequestProperty("Content-Type", "application/json")
 
             if (token != null) {
-                conn.doOutput = true
                 conn.setRequestProperty("Authorization", "Bearer $token")
             }
 
-            if (requestBody != null) {
+            if (requestBody != null && method != "GET") {
+                conn.doOutput = true
                 conn.outputStream.use { it.write(requestBody.toByteArray()) }
             }
 
