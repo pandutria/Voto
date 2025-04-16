@@ -1,5 +1,6 @@
 package com.example.voto.view.ui
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -114,7 +115,7 @@ class CheckoutScreen : AppCompatActivity() {
                 var body = JSONObject(result).getString("body")
 
                 if (code == 200) {
-                    activity.finish()
+                    activity.startActivity(Intent(activity, HistoryScreen::class.java))
                 }
             }
         }
